@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+   New Perspectives on XML
+   Tutorial 3
+   Case Problem 3
+
+   The Save Exotic Animals Trust schema
+   Author: Isaiah Staten
+   Date:   7/25/2024
+
+   Filename:         roster.xsd
+   Supporting Files: rosert.xml
+-->      
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="pType">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="home"/>
+        <xs:enumeration value="cell"/>
+        <xs:enumeration value="work"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="methodType">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="phone"/>
+        <xs:enumeration value="personal"/>
+        <xs:enumeration value="mail"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="levelType">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="founder"/>
+        <xs:enumeration value="sponsor"/>
+        <xs:enumeration value="patron"/>
+        <xs:enumeration value="friendship"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="phoneType">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="\({3}[0-9]\) {3}[0-9] {4}[0-9]"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="roster">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="donor" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+          <xs:attribute name="level" type="levelType" use="required"/>
+            <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="addresss" type="xs:string"/>
+            <xs:element name="phone" minOccurs="1" maxOccurs="unbounded">
+              <xs:attribute name="type" type="pType" use="required"/> 
+            </xs:element>
+            <xs:element name="email" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="donation" type="xs:decimal"/>
+            <xs:element name="method" type="methodType"/>
+            <xs:element name="effectiveDate" type="xs:data"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+   
